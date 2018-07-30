@@ -1,27 +1,48 @@
+<form action="order" method="post">
 <div id="order-1" class="orderbox">
-    Pick a size!<br>
+    What size pizza would you like?<br><br>
+    <div class="pizza-opts">
+        <% sizes.each_with_index do |size, ind| %>
+            <input type="radio" name="psize" value="<%= size[0] %>" <% if ind==0 %>checked<% end %>><%= size[0] %><br>
+        <% end %>
+    </div>
     <button type="button" onclick="switchModal(1, 2)" class="orderbtn">Next</button>
 </div>
 
 <div id="order-2" class="orderbox">
-    Pick Meats.<br>
+    What meat toppings would you like?<br><br>
+    <div class="pizza-opts">
+        <% meats.each do |meat| %>
+            <input type="checkbox" name="pmeat" value="<%= meat %>"><%= meat %><br>
+        <% end %>
+    </div>
     <button type="button" onclick="switchModal(2, 1)" class="orderbtn">Back</button>
     <button type="button" onclick="switchModal(2, 3)" class="orderbtn">Next</button>
 </div>
 
 <div id="order-3" class="orderbox">
-    Pick veggies.<br>
+    Choose your vegetables.<br><br>
+    <div class="pizza-opts">
+        <% veggies.each do |veg| %>
+            <input type="checkbox" name="pveggie" value="<%= veg %>"><%= veg %><br>
+        <% end %>
+    </div>
     <button type="button" onclick="switchModal(3, 2)" class="orderbtn">Back</button>
     <button type="button" onclick="switchModal(3, 4)" class="orderbtn">Next</button>
 </div>
 
 <div id="order-4" class="orderbox">
-    Extra Cheese?<br>
-        <button type="button" onclick="displayConfirm()" class="orderbtn">Confirm</button>
+    Would you like Extra Cheese?<br>
+    <div class="pizza-opts">
+        <input type="radio" name="excheese" value="yes" checked>Yes<br>
+        <input type="radio" name="excheese" value="no">No<br>
+    </div>
+    <button type="button" onclick="switchModal(4, 3)" class="orderbtn">Back</button>
+    <button type="button" onclick='displayConfirm(<%= sizes %>, <%= veg_price %>, <%= meat_price %>, <%= cheese_price %>);' class="orderbtn">Confirm</button>
 </div>
 
 <div id="confirm" class="confirm-modal">
-    <div class="confirm-content">
-        Your price is $<br>
+    <div class="confirm-content" id="final">
     </div>
 </div>
+</form>

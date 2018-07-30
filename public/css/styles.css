@@ -24,6 +24,8 @@ body
   background-color: rgb(59, 48, 158);
   opacity: 0.9;
   padding: 10px;
+  font-family: "Arial Black", sans-serif;
+  font-size: 1.7rem;
 }
 
 .confirm-modal {
@@ -48,5 +50,22 @@ body
 }
 
 .orderbtn {
-  
+  background-color: rgb(209, 3, 3);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 8px;
+  width: 6rem;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-top: 13px;
+  margin-bottom: 5px;
+}
+
+.pizza-opts {
+  font-size: 1rem;
+  align-self: center;
+  width: 7rem;
+  text-align: left;
 }

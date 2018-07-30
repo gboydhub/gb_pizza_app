@@ -10,19 +10,31 @@ def get_veggies()
     ["Peppers", "Onions", "Olives", "Pineapple"]
 end
 
+def meat_price()
+    0.75
+end
+
+def veggie_price()
+    0.50
+end
+
+def cheese_price()
+    1.00
+end
+
 def get_pizza_price(size, meats, veggies, extra_cheese)
     unless get_sizes().has_key?(size); return 0; end
 
     price = get_sizes()[size]
     meats.each do |v|
-        price += 0.75
+        price += meat_price()
     end
 
     veggies.each do |v|
-        price += 0.50
+        price += veggie_price()
     end
 
-    if extra_cheese; price += 1.00; end
+    if extra_cheese; price += cheese_price(); end
     price
 end
 
