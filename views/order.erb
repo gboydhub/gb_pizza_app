@@ -1,0 +1,27 @@
+<div id="order-1" class="orderbox">
+    Pick a size!<br>
+    <button type="button" onclick="switchModal(1, 2)" class="orderbtn">Next</button>
+</div>
+
+<div id="order-2" class="orderbox">
+    Pick Meats.<br>
+    <button type="button" onclick="switchModal(2, 1)" class="orderbtn">Back</button>
+    <button type="button" onclick="switchModal(2, 3)" class="orderbtn">Next</button>
+</div>
+
+<div id="order-3" class="orderbox">
+    Pick veggies.<br>
+    <button type="button" onclick="switchModal(3, 2)" class="orderbtn">Back</button>
+    <button type="button" onclick="switchModal(3, 4)" class="orderbtn">Next</button>
+</div>
+
+<div id="order-4" class="orderbox">
+    Extra Cheese?<br>
+        <button type="button" onclick="displayConfirm()" class="orderbtn">Confirm</button>
+</div>
+
+<div id="confirm" class="confirm-modal">
+    <div class="confirm-content">
+        Your price is $<br>
+    </div>
+</div>
