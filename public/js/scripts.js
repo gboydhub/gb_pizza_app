@@ -121,8 +121,8 @@ function displayConfirm(sizes, veg_price, meat_price, cheese_price)
     {
         var del_price = 5.00;
         del_price += miles * 0.30;
-        modalContent.innerHTML += "Delivery Fee: " + del_price.toFixed(2).toString() + "<br>";
-        modalContent.innerHTML += `Address: ${addr} ${city}, ${state}<br>`;
+        modalContent.innerHTML += "Delivery Fee: <font color='blue'>$" + del_price.toFixed(2).toString() + "</font><br>";
+        modalContent.innerHTML += `Address:<br>${addr} ${city}, ${state}<br><br>`;
         totalPrice += del_price;
     }
 
