@@ -66,6 +66,27 @@ body
 .pizza-opts {
   font-size: 1rem;
   align-self: center;
-  width: 7rem;
-  text-align: left;
+  align-content: center;
+}
+
+.topping-div {
+  width: 50%;
+  align-content: center;
+  position: relative;
+  float: left;
+}
+
+.delivery-opts {
+  visibility: hidden;
+}
+
+.delivery-opts input {
+  outline: none;
+  border: none;
+  margin: 5px;
+  background-color: royalblue;
+}
+
+.delivery-opts input::placeholder {
+  color: black;
 }

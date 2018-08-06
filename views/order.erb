@@ -12,8 +12,14 @@
 <div id="order-2" class="orderbox">
     What meat toppings would you like?<br><br>
     <div class="pizza-opts">
-        <% meats.each do |meat| %>
-            <input type="checkbox" name="pmeat" value="<%= meat %>"><%= meat %><br>
+        <% meats.each_with_index do |meat, ind| %>
+            <div class="topping-div">
+                <img src="/images/<%= meat.downcase %>.png"><br>
+                <input type="checkbox" name="pmeat" value="<%= meat %>"><%= meat %>
+            </div>
+            <% if ind % 2 == 1 %>
+                <br>
+            <%end%>
         <% end %>
     </div>
     <button type="button" onclick="switchModal(2, 1)" class="orderbtn">Back</button>
@@ -23,8 +29,14 @@
 <div id="order-3" class="orderbox">
     Choose your vegetables.<br><br>
     <div class="pizza-opts">
-        <% veggies.each do |veg| %>
-            <input type="checkbox" name="pveggie" value="<%= veg %>"><%= veg %><br>
+        <% veggies.each_with_index do |veg, ind| %>
+            <div class="topping-div">
+            <img src="/images/<%= veg.downcase.tr(" ", "_") %>.png"><br>
+            <input type="checkbox" name="pveggie" value="<%= veg %>"><%= veg %>
+            </div>
+            <% if ind % 2 == 1 %>
+                <br>
+            <%end%>
         <% end %>
     </div>
     <button type="button" onclick="switchModal(3, 2)" class="orderbtn">Back</button>
@@ -38,6 +50,22 @@
         <input type="radio" name="excheese" value="no">No<br>
     </div>
     <button type="button" onclick="switchModal(4, 3)" class="orderbtn">Back</button>
+    <button type="button" onclick="switchModal(4, 5)" class="orderbtn">Next</button>
+</div>
+
+<div id="order-5" class="orderbox">
+    Dine-in or Delivery?<br>
+    <div class="pizza-opts">
+        <input type="radio" name="deliver" value="Dine-In" onclick="hideDelivery()" checked>Dine-In<br>
+        <input type="radio" id="delivery" name="deliver" value="Delivery" onclick="showDelivery()">Delivery<br>
+        <div class="delivery-opts" id="deliver-div">
+            <input type="text" placeholder="Address" name="address" id="address"><br>
+            <input type="text" placeholder="City" name="city" id="city">
+            <input type="text" placeholder="State" name="state" id="state"><br>
+            <input type="number" placeholder="Est. Miles" name="miles" id="miles">
+        </div>
+    </div>
+    <button type="button" onclick="switchModal(5, 4)" class="orderbtn">Back</button>
     <button type="button" onclick='displayConfirm(<%= sizes %>, <%= veg_price %>, <%= meat_price %>, <%= cheese_price %>);' class="orderbtn">Confirm</button>
 </div>
 

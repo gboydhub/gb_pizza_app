@@ -14,6 +14,26 @@ function switchModal(modalCurrent, modalNext)
 
 function displayConfirm(sizes, veg_price, meat_price, cheese_price)
 {
+    var delivery_fee = 0.0;
+    var isDelivery = document.getElementById("delivery").checked;
+    var miles = document.getElementById("miles").value;
+    var addr = document.getElementById("address").value;
+    var city = document.getElementById("city").value;
+    var state = document.getElementById("state").value;
+    if(isDelivery)
+    {
+        if(miles.length < 1 || parseInt(miles) < 1)
+        {
+            alert("Invalid number of miles");
+            return;
+        }
+        miles = parseInt(miles);
+        if(addr.length < 1 || city.length < 1 || state.length < 1)
+        {
+            alert("Please enter a valid address.");
+            return;
+        }
+    }
     var modal = document.getElementById("confirm");
     var modalContent = document.getElementById("final");
 
@@ -97,6 +117,14 @@ function displayConfirm(sizes, veg_price, meat_price, cheese_price)
         modalContent.innerHTML += "No Veggie Toppings<br><br>";
     }
 
+    if(isDelivery)
+    {
+        var del_price = 5.00;
+        del_price += miles * 0.30;
+        modalContent.innerHTML += "Delivery Fee: " + del_price.toFixed(2).toString() + "<br>";
+        modalContent.innerHTML += `Address: ${addr} ${city}, ${state}<br>`;
+        totalPrice += del_price;
+    }
 
     modalContent.innerHTML += "Total: <font color='blue'>$" + totalPrice.toFixed(2).toString() + "</font><br>";
     modalContent.innerHTML += "<button type='submit' class='orderbtn' style='width: 9rem;'>Place Order</button>";
@@ -111,4 +139,13 @@ window.onclick = function(event)
     {
         modal.style.display = "none";
     }
+}
+
+function showDelivery()
+{
+    document.getElementById("deliver-div").style.visibility = "visible";
+}
+function hideDelivery()
+{
+    document.getElementById("deliver-div").style.visibility = "hidden";
 }
