@@ -126,8 +126,12 @@ function displayConfirm(sizes, veg_price, meat_price, cheese_price)
         totalPrice += del_price;
     }
 
+    document.getElementById("final-price").value = totalPrice.toFixed(2).toString();
     modalContent.innerHTML += "Total: <font color='blue'>$" + totalPrice.toFixed(2).toString() + "</font><br>";
-    modalContent.innerHTML += "<button type='submit' class='orderbtn' style='width: 9rem;'>Place Order</button>";
+    modalContent.innerHTML += "<div id='paypal-button-container'></div>";
+    modalContent.innerHTML += "<div id='confirm-button'></div>";
+    renderPayPal(totalPrice.toFixed(2).toString());
+    //modalContent.innerHTML += "<button type='submit' class='orderbtn' style='width: 9rem;'>Place Order</button>";
 
     modal.style.display = "block";
 }
@@ -148,4 +152,59 @@ function showDelivery()
 function hideDelivery()
 {
     document.getElementById("deliver-div").style.visibility = "hidden";
+}
+
+function renderPayPal(amount)
+{
+    paypal.Button.render({
+
+        // Set your environment
+
+        env: 'sandbox', // sandbox | production
+
+        // Specify the style of the button
+
+        style: {
+            label: 'checkout',
+            size:  'small',    // small | medium | large | responsive
+            shape: 'pill',     // pill | rect
+            color: 'gold'      // gold | blue | silver | black
+        },
+
+        // PayPal Client IDs - replace with your own
+        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+
+        client: {
+            sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+            production: '<insert production client id>'
+        },
+
+        payment: function(data, actions) {
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: amount, currency: 'USD' }
+                        }
+                    ]
+                },
+                experience: {
+                    input_fields: {
+                      no_shipping: 1
+                    }
+                }//,
+                // flow_config: {
+                //     landing_page_type: "Billing",
+                //     bank_txn_pending_url: "http://gb-pizza-app.herokuapp.com/order",
+                //     return_uri_http_method: "POST"
+                // }
+            });
+        },
+        onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                window.location = "/complete"
+            });
+        }
+
+        }, '#paypal-button-container');
 }

@@ -12,9 +12,9 @@ get '/' do
 end
 
 post '/order' do
-  redirect '/order'
+  redirect '/complete'
 end
 
-get '/order' do
+get '/complete' do
   erb :done
 end
